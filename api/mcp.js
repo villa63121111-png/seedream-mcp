@@ -152,6 +152,39 @@ function getServer() {
     }
   );
 
+  // 临时调试工具:检查环境变量是否被正确读取(不暴露完整密钥)
+  // 排查完问题后可以删除这个工具。
+  server.registerTool(
+    "debug_env",
+    {
+      title: "Debug Environment Variables",
+      description: "临时调试工具:检查 ARK_API_KEY / ARK_MODEL_ID 是否已配置",
+      inputSchema: {},
+    },
+    async () => {
+      const apiKey = process.env.ARK_API_KEY;
+      const modelId = process.env.ARK_MODEL_ID;
+      return {
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify(
+              {
+                ARK_API_KEY_present: !!apiKey,
+                ARK_API_KEY_length: apiKey ? apiKey.length : 0,
+                ARK_API_KEY_prefix: apiKey ? apiKey.slice(0, 8) : null,
+                ARK_MODEL_ID_present: !!modelId,
+                ARK_MODEL_ID_value: modelId || null,
+              },
+              null,
+              2
+            ),
+          },
+        ],
+      };
+    }
+  );
+
   return server;
 }
 
