@@ -1,0 +1,13 @@
+{
+  "name": "seedream-mcp",
+  "version": "1.0.0",
+  "description": "MCP server that exposes ByteDance Seedream (Volcengine Ark) text-to-image generation as a tool for Claude / Cowork",
+  "main": "api/mcp.js",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "vercel dev"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4"
+  }
+}
